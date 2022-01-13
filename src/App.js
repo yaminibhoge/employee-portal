@@ -11,17 +11,10 @@ import {Navbar, Nav, Container}from 'react-bootstrap'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getEmployees } from './actions/employee-action-creators'
-//amplify packages
-import { Amplify} from 'aws-amplify';
-import {Authenticator} from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import awsEXports from './aws-exports';
-Amplify.configure(awsEXports);
 
 function App({getEmployees}) {
   getEmployees();
   return (
-    <Authenticator loginMechanisms={['username']  }>
     <Router>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -32,8 +25,6 @@ function App({getEmployees}) {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-            <Nav.Link onClick={signOut}>SignOut</Nav.Link>
-            <Nav.Link href="#">Welcome {user.username}</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Container>
@@ -48,7 +39,6 @@ function App({getEmployees}) {
         </Routes>
       </div>
     </Router>
-    </Authenticator>
   );
 }
 
